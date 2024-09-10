@@ -7,4 +7,6 @@ $string['coefficienta'] = 'Коэффициент a';
 $string['coefficientb'] = 'Коэффициент b';
 $string['coefficientc'] = 'Коэффициент c';
 $string['result'] = 'Корни уравнения: x1={$a->x1}, x2={$a->x2}';
+$string['resultx1'] = 'Корень x1';
+$string['resultx2'] = 'Корень x2';
 $string['history'] = 'История расчетов';
