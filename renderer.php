@@ -23,11 +23,11 @@ class block_quadratic_calculator_renderer extends plugin_renderer_base
             $output .= html_writer::start_tag('table', ['class' => 'generaltable fullwidth']);
             $output .= html_writer::start_tag('thead');
             $output .= html_writer::start_tag('tr');
-            $output .= html_writer::tag('th', "a", ['scope' => 'col']);
-            $output .= html_writer::tag('th', "b", ['scope' => 'col']);
-            $output .= html_writer::tag('th', "c", ['scope' => 'col']);
-            $output .= html_writer::tag('th', "x1", ['scope' => 'col']);
-            $output .= html_writer::tag('th', "x2", ['scope' => 'col']);
+            $output .= html_writer::tag('th', get_string('coefficienta', 'block_quadratic_calculator'), ['scope' => 'col']);
+            $output .= html_writer::tag('th', get_string('coefficientb', 'block_quadratic_calculator'), ['scope' => 'col']);
+            $output .= html_writer::tag('th', get_string('coefficientc', 'block_quadratic_calculator'), ['scope' => 'col']);
+            $output .= html_writer::tag('th', get_string('resultx1', 'block_quadratic_calculator'), ['scope' => 'col']);
+            $output .= html_writer::tag('th', get_string('resultx2', 'block_quadratic_calculator'), ['scope' => 'col']);
             $output .= html_writer::end_tag('tr');
             $output .= html_writer::end_tag('thead');
             $output .= html_writer::start_tag('tbody');
