@@ -1,20 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<XMLDB PATH="blocks/quadratic_calculator/db" VERSION="2024010100"
+<XMLDB PATH="blocks/quadratic_calculator/db" VERSION="2024090917"
        COMMENT="Install file for the quadratic calculator block">
     <TABLES>
         <TABLE NAME="block_quadratic_calculator" COMMENT="History of quadratic calculations">
             <FIELDS>
                 <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
-                <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true"/>
-                <FIELD NAME="a" TYPE="float" NOTNULL="true"/>
-                <FIELD NAME="b" TYPE="float" NOTNULL="true"/>
-                <FIELD NAME="c" TYPE="float" NOTNULL="true"/>
-                <FIELD NAME="x1" TYPE="float" NOTNULL="true"/>
-                <FIELD NAME="x2" TYPE="float" NOTNULL="true"/>
-                <FIELD NAME="created_at" TYPE="int" LENGTH="10" NOTNULL="true"/>
+                <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true"
+                       COMMENT="ID of the user who made the calculation"/>
+                <FIELD NAME="a" TYPE="float" NOTNULL="true" COMMENT="Coefficient a of the quadratic equation"/>
+                <FIELD NAME="b" TYPE="float" NOTNULL="true" COMMENT="Coefficient b of the quadratic equation"/>
+                <FIELD NAME="c" TYPE="float" NOTNULL="true" COMMENT="Coefficient c of the quadratic equation"/>
+                <FIELD NAME="x1" TYPE="float" NOTNULL="false"
+                       COMMENT="First root of the equation, can be null if no real roots"/>
+                <FIELD NAME="x2" TYPE="float" NOTNULL="false"
+                       COMMENT="Second root of the equation, can be null if no real roots"/>
+                <FIELD NAME="created_at" TYPE="int" LENGTH="10" NOTNULL="true"
+                       COMMENT="Timestamp of when the calculation was made"/>
             </FIELDS>
             <KEYS>
                 <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+                <KEY NAME="userid_fk" TYPE="foreign" FIELDS="userid" REFTABLE="user" REFFIELDS="id"
+                     COMMENT="Foreign key linking to the user table"/>
             </KEYS>
         </TABLE>
     </TABLES>
