@@ -3,13 +3,19 @@ declare(strict_types=1);
 
 namespace block_quadratic_calculator\form;
 
-use moodleform;
+require_once($CFG->libdir . '/formslib.php');
 
-class calculator_form extends moodleform
+class calculator_form extends \moodleform
 {
     public function definition()
     {
         $mform = $this->_form;
+
+        global $PAGE;
+        $full_url = $PAGE->url->out_as_local_url();
+
+        $mform->addElement('hidden', 'return_url', $full_url);
+        $mform->setType('return_url', PARAM_URL);
 
         $mform->addElement('text', 'a', get_string('coefficienta', 'block_quadratic_calculator'));
         $mform->setType('a', PARAM_FLOAT);

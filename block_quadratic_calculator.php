@@ -26,19 +26,50 @@ class block_quadratic_calculator extends block_base
 
     private function get_calculator_form()
     {
-        $form = new \block_quadratic_calculator\form\calculator_form();
+        global $PAGE;
+
+        $courseid = $this->get_course_id();
+
+        $full_url = $PAGE->url->out_as_local_url();
+        $customdata = ['courseid' => $courseid];
+
+        $form = new \block_quadratic_calculator\form\calculator_form($full_url, $customdata);
+
+        $output = '';
+
         if ($data = $form->get_data()) {
             $solver = new \block_quadratic_calculator\service\quadratic_solver();
-            $solution = $solver->solve((float)$data->a, (float)$data->b, (float)$data->c);
+            $a = (float) $data->a;
+            $b = (float) $data->b;
+            $c = (float) $data->c;
 
-            $this->store_solution($data->a, $data->b, $data->c, $solution['x1'], $solution['x2']);
-            return get_string('result', 'block_quadratic_calculator', $solution);
+            $solution = $solver->solve($a, $b, $c);
+
+            $x1 = $solution['x1'] ?? null;
+            $x2 = $solution['x2'] ?? null;
+
+            $this->store_solution($a, $b, $c, $x1, $x2);
+
+            $output .= get_string('result', 'block_quadratic_calculator', $solution);
         }
 
-        return $form->render();
+        $output .= $form->render();
+
+        return $output;
     }
 
-    private function store_solution(float $a, float $b, float $c, float $x1, float $x2)
+    private function get_course_id(): int
+    {
+        global $PAGE;
+
+        if ($PAGE->context->contextlevel == CONTEXT_COURSE) {
+            return (int) $PAGE->context->instanceid;
+        }
+
+        return 0;
+    }
+
+    private function store_solution(float $a, float $b, float $c, ?float $x1, ?float $x2)
     {
         global $DB, $USER;
         $record = new stdClass();
